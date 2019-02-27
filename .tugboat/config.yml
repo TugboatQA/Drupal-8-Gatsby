@@ -9,11 +9,12 @@ services:
         - a2enmod headers rewrite
         
         # Install Drush 8.x
-        - composer --no-ansi global require drush/drush:8.x drupal/jsonapi:8.x
+        - composer --no-ansi global require drush/drush:8.x
         - ln -sf ~/.composer/vendor/bin/drush /usr/local/bin/drush
         
         # Download Drupal and its dependencies.
         - composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
+        - composer require drupal/jsonapi:8.x
         - ln -snf "${TUGBOAT_ROOT}/drupal/web" "${DOCROOT}"
         
         # Install Drupal and the database. Change the admin password.
