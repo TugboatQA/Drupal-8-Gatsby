@@ -3,3 +3,25 @@ services:
     image: tugboatqa/php:7-apache
     default: true
     depends: mysql
+
+    commands:
+      init:
+        - docker-php-ext-install opcache
+        - a2enmod headers rewrite
+        - composer create-project drupal-composer/drupal-project:8.x-dev web --no-interaction
+        - ln -snf "${TUGBOAT_ROOT}/web" "${DOCROOT}"
+        
+      update: 
+        - cp "${TUGBOAT_ROOT}/.tugboat/settings.local.php" "${DOCROOT}/sites/default/"
+        - echo "\$settings['hash_salt'] = '$(openssl rand -hex 32)';" >> "${DOCROOT}/sites/default/settings.local.php"
+        - composer install --no-ansi
+        
+      build:
+        - drush -r "${DOCROOT}" cache-rebuild
+        - drush -r "${DOCROOT}" updb -y
+        
+  mysql:
+    image: tugboatqa/mysql:5
+    commands:
+      
+        
