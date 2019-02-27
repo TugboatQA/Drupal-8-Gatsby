@@ -12,8 +12,8 @@ services:
         - composer --no-ansi global require drush/drush:8.x
         - ln -sf ~/.composer/vendor/bin/drush /usr/local/bin/drush
         
-        - composer create-project drupal-composer/drupal-project:8.x-dev web --stability dev --no-interaction
-        # - drush -r "${DOCROOT}" site-install --db-url="mysql://tugboat:tugboat@mysql/tugboat" -y
+        - composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
+        - ln -snf "${TUGBOAT_ROOT}/drupal/web" "${DOCROOT}"
         
       update: 
         
