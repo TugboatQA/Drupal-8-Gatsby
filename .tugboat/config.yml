@@ -8,12 +8,9 @@ services:
       init:
         # - docker-php-ext-install opcache
         - a2enmod headers rewrite
-        - wget -O /usr/local/bin/drush https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
-        - chmod +x /usr/local/bin/drush
         - composer create-project drupal-composer/drupal-project:8.x-dev web --stability dev --no-interaction
         
       update: 
-        - composer install --no-ansi
         
   mysql:
     image: tugboatqa/mysql:5
