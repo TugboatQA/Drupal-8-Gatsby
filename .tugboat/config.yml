@@ -12,8 +12,16 @@ services:
         - composer --no-ansi global require drush/drush:8.x
         - ln -sf ~/.composer/vendor/bin/drush /usr/local/bin/drush
         
+        # Download Drupal and its dependencies.
         - composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
         - ln -snf "${TUGBOAT_ROOT}/drupal/web" "${DOCROOT}"
+        
+        # Install Drupal and the database. Change the admin password.
+        # The variable ${ADMIN_PWD} is an environment variables coming 
+        # from Tugboat on the Repository Settings page. You must set 
+        # this up ahead of time.
+        - drush -r "${DOCROOT}" site-install --db-url="mysql://tugboat:tugboat@mysql/tugboat" -y
+        - drush -r "${DOCROOT}" user-password admin --password="${ADMIN_PWD}"
         
       update: 
         
