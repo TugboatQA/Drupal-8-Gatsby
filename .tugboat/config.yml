@@ -9,6 +9,7 @@ services:
         # - docker-php-ext-install opcache
         - a2enmod headers rewrite
         - composer create-project drupal-composer/drupal-project:8.x-dev web --stability dev --no-interaction
+        - ln -sf ~/.composer/vendor/bin/drush /usr/local/bin/drush
         
       update: 
         
