@@ -21,7 +21,7 @@ services:
         # from Tugboat on the Repository Settings page. You must set 
         # this up ahead of time.
         - drush -r "${DOCROOT}" site-install --db-url="mysql://tugboat:tugboat@mysql/tugboat" -y
-        - drush -r "${DOCROOT}" user-password admin --password="${ADMIN_PWD}"
+        - drush -r "${DOCROOT}" user-password admin "${ADMIN_PWD}"
         
         # Setup the necessary file permissions. 
         - mkdir -p "${DOCROOT}/files"
