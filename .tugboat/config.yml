@@ -8,8 +8,9 @@ services:
       init:
         # - docker-php-ext-install opcache
         - a2enmod headers rewrite
-        - composer create-project drupal-composer/drupal-project:8.x-dev web --stability dev --no-interaction
+        - composer --no-ansi global require drush/drush:8.1.18
         - ln -sf ~/.composer/vendor/bin/drush /usr/local/bin/drush
+        - composer create-project drupal-composer/drupal-project:8.x-dev web --stability dev --no-interaction
         
       update: 
         
