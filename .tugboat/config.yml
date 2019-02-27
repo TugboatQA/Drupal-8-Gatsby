@@ -6,11 +6,14 @@ services:
 
     commands:
       init:
-        # - docker-php-ext-install opcache
         - a2enmod headers rewrite
-        - composer --no-ansi global require drush/drush:8.1.18
+        
+        # Install Drush 8.x
+        - composer --no-ansi global require drush/drush:8.x
         - ln -sf ~/.composer/vendor/bin/drush /usr/local/bin/drush
+        
         - composer create-project drupal-composer/drupal-project:8.x-dev web --stability dev --no-interaction
+        # - drush -r "${DOCROOT}" site-install --db-url="mysql://tugboat:tugboat@mysql/tugboat" -y
         
       update: 
         
