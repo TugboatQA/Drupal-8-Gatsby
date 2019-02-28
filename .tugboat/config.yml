@@ -14,7 +14,7 @@ services:
         
         # Download Drupal and its dependencies.
         - composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
-        - cd "${TUGBOAT_ROOT}/drupal" && composer --no-ansi global require drupal/jsonapi
+        - cd "${TUGBOAT_ROOT}/drupal" && composer --no-ansi global require drupal/jsonapi drupal/devel
         - cd "${TUGBOAT_ROOT}/drupal" && composer update
         - ln -snf "${TUGBOAT_ROOT}/drupal/web" "${DOCROOT}"
         
@@ -30,7 +30,7 @@ services:
         - chown www-data "${DOCROOT}/files"
         - chmod 744 "${DOCROOT}/files"
         
-        - drush -r "${DOCROOT}" pm-enable -y jsonapi
+        - drush -r "${DOCROOT}" pm-enable -y jsonapi, devel
         
       build:
         - drush -r "${DOCROOT}" cache-rebuild
