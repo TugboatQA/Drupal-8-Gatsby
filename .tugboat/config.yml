@@ -13,28 +13,28 @@ services:
         - ln -sf ~/.composer/vendor/bin/drush /usr/local/bin/drush
         
         # Download Drupal and its dependencies.
-        - composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
-        - cd "${TUGBOAT_ROOT}/drupal" && composer --no-ansi global require drupal/jsonapi drupal/devel
-        - cd "${TUGBOAT_ROOT}/drupal" && composer update
-        - ln -snf "${TUGBOAT_ROOT}/drupal/web" "${DOCROOT}"
+        #- composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
+        #- cd "${TUGBOAT_ROOT}/drupal" && composer --no-ansi global require drupal/jsonapi drupal/devel
+        #- cd "${TUGBOAT_ROOT}/drupal" && composer update
+        #- ln -snf "${TUGBOAT_ROOT}/drupal/web" "${DOCROOT}"
         
         # Install Drupal and the database. Change the admin password.
         # The variable ${ADMIN_PWD} is an environment variables coming 
         # from Tugboat on the Repository Settings page. You must set 
         # this up ahead of time.
-        - drush -r "${DOCROOT}" site-install --db-url="mysql://tugboat:tugboat@mysql/tugboat" -y
-        - drush -r "${DOCROOT}" user-password admin "${ADMIN_PWD}"
+        #- drush -r "${DOCROOT}" site-install --db-url="mysql://tugboat:tugboat@mysql/tugboat" -y
+        #- drush -r "${DOCROOT}" user-password admin "${ADMIN_PWD}"
         
         # Setup the necessary file permissions. 
-        - mkdir -p "${DOCROOT}/files"
-        - chown www-data "${DOCROOT}/files"
-        - chmod 744 "${DOCROOT}/files"
+        #- mkdir -p "${DOCROOT}/files"
+        #- chown www-data "${DOCROOT}/files"
+        #- chmod 744 "${DOCROOT}/files"
         
-        - drush -r "${DOCROOT}" pm-enable -y jsonapi, devel
+        #- drush -r "${DOCROOT}" pm-enable -y jsonapi, devel
         
       build:
-        - drush -r "${DOCROOT}" cache-rebuild
-        - drush -r "${DOCROOT}" updatedb -y
+        #- drush -r "${DOCROOT}" cache-rebuild
+        #- drush -r "${DOCROOT}" updatedb -y
         
   mysql:
     image: tugboatqa/mysql:5
