@@ -14,9 +14,7 @@ services:
         
         # Download Drupal and its dependencies.
         - composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
-        - cd "${TUGBOAT_ROOT}/drupal" && composer require drupal/jsonapi 
-        # drupal/devel
-        #- cd "${TUGBOAT_ROOT}/drupal" && composer update
+        - cd "${TUGBOAT_ROOT}/drupal" && composer require drupal/jsonapi drupal/devel
         - ln -snf "${TUGBOAT_ROOT}/drupal/web" "${DOCROOT}"
         
         # Install Drupal and the database. Change the admin password.
