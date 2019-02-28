@@ -30,6 +30,8 @@ services:
         - chown www-data "${DOCROOT}/files"
         - chmod 744 "${DOCROOT}/files"
         
+        - drush -r "${DOCROOT}" pm-enable -y jsonapi
+        
       build:
         - drush -r "${DOCROOT}" cache-rebuild
         - drush -r "${DOCROOT}" updatedb -y
