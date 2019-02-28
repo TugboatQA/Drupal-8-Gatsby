@@ -30,7 +30,7 @@ services:
         - chmod 744 "${DOCROOT}/files"
         
       build:
-        - drush -r "${DOCROOT}" cache-rebuild all
+        - drush -r "${DOCROOT}" cache-rebuild
         - drush -r "${DOCROOT}" updatedb -y
         
   mysql:
